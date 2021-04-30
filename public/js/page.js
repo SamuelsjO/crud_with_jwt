@@ -1,4 +1,30 @@
 
+
+const axiosConfig = {
+    headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+    }
+}
+
+function login(){
+    const emailField = document.getElementById("email");
+    const passwordField = document.getElementById("password");
+
+    const email = emailField.value;
+    const password = passwordField.value;
+
+    axios.post("http://localhost:3000/auth",{ 
+        email,
+        password
+    }).then( response => { 
+        var token = response.data.token;
+        localStorage.setItem("token",token);
+        axiosConfig.headers.Authorization = "Bearer " + localStorage.getItem("token");
+    }).catch(err => {
+        alert("Login incorreto")
+    })
+}
+
 function createGames(){
     const titleInput = document.getElementById("title")
     const yearInput = document.getElementById("year")
@@ -10,7 +36,7 @@ function createGames(){
         price: priceInput.value
     }
 
-    axios.post("http://localhost:3000/games", game).then(response => {
+    axios.post("http://localhost:3000/games", game, axiosConfig).then(response => {
         if(response.status == 200){
             alert("Game cadastrado")
         }
@@ -22,7 +48,7 @@ function createGames(){
 function deleteGame(listItem){
     const id = listItem.getAttribute("data-id");
 
-    axios.delete("http://localhost:3000/" + id).then( response => {
+    axios.delete("http://localhost:3000/" + id, axiosConfig).then( response => {
         alert(`o filme de id ${id} foi deletado`)
     }).catch(err => {
         console.log(err)
@@ -57,7 +83,7 @@ function updateGame(){
 
     const id = idInput.value
 
-    axios.put("http://localhost:3000/"+id,game).then(response => {
+    axios.put("http://localhost:3000/"+id,game, axiosConfig).then(response => {
         if(response.status == 200){
             alert("Game Editado")
         }
@@ -66,38 +92,41 @@ function updateGame(){
     })
 }
 
-    axios.get("http://localhost:3000/findGames").then(response => {
-        const games = response.data
+    axios.get("http://localhost:3000/findGames", axiosConfig).then(response => {
+        let games = response.data;
+        console.log("Lista de games: ", games)
         const list = document.getElementById("games");
 
         games.forEach(game => {
-            const item = document.createElement("li");
+            var item = document.createElement("li");
 
-            item.setAttribute("data-id", game.id)
+            item.setAttribute("data-id",game.id);
             item.setAttribute("data-title", game.title)
             item.setAttribute("data-year", game.year)
             item.setAttribute("data-price", game.price)
 
-            item.innerHTML = game.id +  " - " + game.title + " - $" + game.price;
+            item.innerHTML = game.id + " - " + game.title + " - $" + game.price;
 
-            const deleteBtn = document.createElement("button");
+            var deleteBtn = document.createElement("button");
             deleteBtn.innerHTML = "Deletar";
             deleteBtn.addEventListener("click", function(){
                 deleteGame(item);
             })
 
-            const editBtn = document.createElement("button");
+            var editBtn = document.createElement("button");
             editBtn.innerHTML = "Editar"
             editBtn.addEventListener("click", function(){
                 editGames(item);
             })
 
-
-            list.appendChild(editBtn)
             list.appendChild(deleteBtn);
+            list.appendChild(editBtn)
             list.appendChild(item);
         });
 
     }).catch(error => {
         console.log(error)
     })
+
+
+    

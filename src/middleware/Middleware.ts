@@ -1,4 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction, Request } from 'express';
+import { RequestCustom } from '../interface/InterfaceRequest';
+
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
@@ -10,14 +12,18 @@ class Middleware {
         
         const authToken = request.headers['authorization']
         if (authToken != undefined) {
-            const bearer = authToken.split('');
+            const bearer = authToken.split(' ');
             const token = bearer[1];
 
-            jwt.verify(token,jwtSecret, (err, data)=> {
+            console.log(token)
+
+            jwt.verify(token,jwtSecret, (err: any, data: any)=> {
                 if (err) {
-                    
+                   response.json({err: "Token invalido"})
                 } else {
-                    
+                   
+                   next();
+
                 }
             })
 
@@ -27,9 +33,7 @@ class Middleware {
                 err: "Token invalido"
             });
         }
-        console.log(authToken)
-        console.log(process.env.ENV_JWT_SECRET);
-        next();
+        
     }
 }
 
