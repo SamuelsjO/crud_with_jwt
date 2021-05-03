@@ -1,4 +1,4 @@
-# crud_with_jwt
+# API de Games
 Esta API é utilizada para controle de estoque de GAMES
 ## Endpoints
 ### POST /games
