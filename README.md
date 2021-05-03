@@ -62,6 +62,87 @@ Exemplo:
 }
 ```
 -----------------------------------------------------------------------------------------------------------------------------------------------
+### GET /findGames
+Esse endpoint busca todos os games cadastrado na base
+#### Paramentros
+nenhum
+
+#### Respostas
+#### caso 200
+Casso essa resposta aconteça voçe vai receber o game referente ao ID buscado.
+
+Exemplo:
+```
+
+{
+    "id": "b6146228-9c83-4ebd-875f-047784ed5a3e",
+    "title": "CallOFDuty",
+    "year": "2020",
+    "price": "39"
+  },
+  {
+    "id": "2803d488-edc6-4fe7-9e58-a8c81d34b905",
+    "title": "Super Mario",
+    "year": "2012",
+    "price": "98"
+  },
+  {
+    "id": "c2f6edc9-0872-4e80-b8af-7b54072994db",
+    "title": "007",
+    "year": "1998",
+    "price": "120"
+  },
+  {
+    "id": "2b953828-b03b-4d04-9daf-3d99dfb4c3c2",
+    "title": "Fifa",
+    "year": "2020",
+    "price": "159"
+  }
+
+```
+-----------------------------------------------------------------------------------------------------------------------------------------------
+### PUT /:id
+Esse endpoint faz update em um game por ID
+#### Paramentros
+id: ID de update relacionado ao game, ID tipo UUID, modificações no json abaixo chamando essa rota será atualizado
+
+Exemplo: 
+```
+{
+  "title": "Normaland - vence oscar",
+  "year": "2020",
+  "price": "1252"
+}
+
+```
+
+#### Respostas
+#### caso 200
+Casso essa resposta aconteça voçe vai receber o game referente ao ID buscado.
+
+Exemplo:
+```
+{
+  "id": "2803d488-edc6-4fe7-9e58-a8c81d34b905",
+  "title": "Super Mario",
+  "year": "2012",
+  "price": "98"
+}
+```
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+### DELETE /:id
+Esse endpoint faz Deleta em um game por ID
+#### Paramentros
+id: ID de update relacionado ao game, ID tipo UUID, D no json abaixo chamando essa rota será atualizado
+
+
+#### Respostas
+#### caso 200
+Casso essa resposta aconteça voçe deletou um game.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 ### POST /auth
 Esse endpoint authentica o processo de login
@@ -125,4 +206,33 @@ Caso aconteça, isso significa que aconteceu alguma falha durante o processo de 
   err: "Credencial invalida" 
 }
 ```
+-----------------------------------------------------------------------------------------------------------------------------------------------
+### POST /userCreate
+Esse endpoint cria um usuario no banco, esse usuario será usado para o acesso a plataforma
+#### Paramentros
+nenhum
 
+Exemplo: 
+```
+{
+	"name": "Samuel",
+	"email": "teste@gmail.com",
+	"password": "123"
+}
+
+```
+
+#### Respostas
+#### caso 200
+Casso essa resposta aconteça voçe vai receber o game referente ao ID buscado.
+
+Exemplo:
+```
+{
+  "id": "14009fb9-5610-4ceb-a7d9-e58d2feb8d17",
+  "name": "Samuel",
+  "email": "teste@gmail.com",
+  "password": "123"
+}
+```
+-----------------------------------------------------------------------------------------------------------------------------------------------
