@@ -52,7 +52,15 @@ Exemplo:
 #### caso 200
 Casso essa resposta aconteça voçe vai receber o game referente ao ID buscado.
 
-
+Exemplo:
+```
+{
+  "id": "2803d488-edc6-4fe7-9e58-a8c81d34b905",
+  "title": "Super Mario",
+  "year": "2012",
+  "price": "98"
+}
+```
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
 ### POST /auth
