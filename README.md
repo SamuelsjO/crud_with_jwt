@@ -42,6 +42,7 @@ Caso aconteça, isso significa que aconteceu alguma falha durante o processo de 
 Esse endpoint authentica o processo de login
 #### Paramentros
 email: email do usuario no sistema
+
 password: Senha do usuario cadastrado no sistema, com aquele respectivo email
 
 Exemplo: 
